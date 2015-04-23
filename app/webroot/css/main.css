@@ -1,0 +1,24 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 22/04/2015, 07:04:39 PM
+    Author     : mchacon
+*/
+.members-table {
+  font-size: 11px; }
+  .members-table th {
+    text-align: center; }
+  .members-table td {
+    padding: 2px; }
+    .members-table td input, .members-table td select {
+      font-size: 11px;
+      padding: 0;
+      width: 98%; }
+  .members-table .delete-member {
+    margin: 0;
+    padding: 0 3px; }
+
+/*# sourceMappingURL=main.css.map */
