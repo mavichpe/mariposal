@@ -1,78 +1,80 @@
-<div class="members index">
-	<h2><?php echo __('Members'); ?></h2>
-	<table cellpadding="0" cellspacing="0">
-	<thead>
-	<tr>
-			<th><?php echo $this->Paginator->sort('id'); ?></th>
-			<th><?php echo $this->Paginator->sort('name'); ?></th>
-			<th><?php echo $this->Paginator->sort('cedula'); ?></th>
-			<th><?php echo $this->Paginator->sort('edad'); ?></th>
-			<th><?php echo $this->Paginator->sort('estado-civil'); ?></th>
-			<th><?php echo $this->Paginator->sort('tel-habitacion'); ?></th>
-			<th><?php echo $this->Paginator->sort('tel-trabajo'); ?></th>
-			<th><?php echo $this->Paginator->sort('tel-cel'); ?></th>
-			<th><?php echo $this->Paginator->sort('direccion'); ?></th>
-			<th><?php echo $this->Paginator->sort('ocupacion'); ?></th>
-			<th><?php echo $this->Paginator->sort('trabajo'); ?></th>
-			<th><?php echo $this->Paginator->sort('programa-obtar'); ?></th>
-			<th><?php echo $this->Paginator->sort('is-ahorro'); ?></th>
-			<th><?php echo $this->Paginator->sort('is-bono-59'); ?></th>
-			<th><?php echo $this->Paginator->sort('is-discapacitado'); ?></th>
-			<th><?php echo $this->Paginator->sort('discapacidad-details'); ?></th>
-			<th><?php echo $this->Paginator->sort('observaciones'); ?></th>
-			<th><?php echo $this->Paginator->sort('elaborado-por'); ?></th>
-			<th><?php echo $this->Paginator->sort('ingreso'); ?></th>
-			<th class="actions"><?php echo __('Actions'); ?></th>
-	</tr>
-	</thead>
-	<tbody>
+<?php ?>
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">
+                Asociados 
+                <a href="<?php echo Router::url(array("action"=>"add")); ?>" class="btn btn-default btn-success" > <i class="fa fa-lg fa-user"></i> &nbsp;Agregar Asociado</a>
+                <a href="<?php echo Router::url(array("action"=>"generateAll")); ?>" class="btn btn-default btn-warning" > <i class="fa fa-lg fa-download"></i> &nbsp;Descargar Todos los Carnes</a>
+            </h1>
+        </div>
+        <div class="col-lg-6">
+            <label>Filtro de Busqueda</label>
+            <div class="form-group input-group">
+                <?php echo $this->Form->create(); ?>
+                <?php echo $this->Form->input("filter",array("label"=>false,"class"=>"form-control","id"=>"search-box","div"=>false)); ?>
+                <?php echo $this->Form->end(); ?>
+                </form>
+                <span class="input-group-btn">
+                    <button class="btn btn-default" type="button"><i class="fa fa-search"></i></button>
+                    <button class="btn btn-danger" type="button" onclick="clearForm()"><i class="fa fa-close"></i></button>
+                </span>
+            </div>
+        </div>
+        <div class="col-lg-12">
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover table-striped">
+                    <thead>
+                        <tr>
+                            <th width="18%"><?php echo $this->Paginator->sort('name',"Nombre"); ?></th>
+                            <th width="10%"><?php echo $this->Paginator->sort('cedula'); ?></th>
+                            <th width="10%"><?php echo $this->Paginator->sort('tel-habitacion',"Tel Habitacion"); ?></th>
+                            <th width="10%"><?php echo $this->Paginator->sort('tel-trabajo',"Tel Trabajo"); ?></th>
+                            <th width="8%"><?php echo $this->Paginator->sort('tel-cel',"Celular"); ?></th>
+                            <th width="8%"><?php echo $this->Paginator->sort('programa-obtar',"Tipo de Programa"); ?></th>
+                            <th width="8%"><?php echo $this->Paginator->sort('is-ahorro','Ahorro / credito'); ?></th>
+                            <th width="5%"><?php echo $this->Paginator->sort('is-bono-59','Bono ley 59'); ?></th>
+                            <th width="10%"><?php echo $this->Paginator->sort('ingreso',"Fecha Ingreso"); ?></th>
+                            <th width="8%" class="actions"><?php echo __('Acciones'); ?></th>
+                        </tr>
+                    </thead>
+                    <tbody>
 	<?php foreach ($members as $member): ?>
-	<tr>
-		<td><?php echo h($member['Member']['id']); ?>&nbsp;</td>
-		<td><?php echo h($member['Member']['name']); ?>&nbsp;</td>
-		<td><?php echo h($member['Member']['cedula']); ?>&nbsp;</td>
-		<td><?php echo h($member['Member']['edad']); ?>&nbsp;</td>
-		<td><?php echo h($member['Member']['estado-civil']); ?>&nbsp;</td>
-		<td><?php echo h($member['Member']['tel-habitacion']); ?>&nbsp;</td>
-		<td><?php echo h($member['Member']['tel-trabajo']); ?>&nbsp;</td>
-		<td><?php echo h($member['Member']['tel-cel']); ?>&nbsp;</td>
-		<td><?php echo h($member['Member']['direccion']); ?>&nbsp;</td>
-		<td><?php echo h($member['Member']['ocupacion']); ?>&nbsp;</td>
-		<td><?php echo h($member['Member']['trabajo']); ?>&nbsp;</td>
-		<td><?php echo h($member['Member']['programa-obtar']); ?>&nbsp;</td>
-		<td><?php echo h($member['Member']['is-ahorro']); ?>&nbsp;</td>
-		<td><?php echo h($member['Member']['is-bono-59']); ?>&nbsp;</td>
-		<td><?php echo h($member['Member']['is-discapacitado']); ?>&nbsp;</td>
-		<td><?php echo h($member['Member']['discapacidad-details']); ?>&nbsp;</td>
-		<td><?php echo h($member['Member']['observaciones']); ?>&nbsp;</td>
-		<td><?php echo h($member['Member']['elaborado-por']); ?>&nbsp;</td>
-		<td><?php echo h($member['Member']['ingreso']); ?>&nbsp;</td>
-		<td class="actions">
-			<?php echo $this->Html->link(__('View'), array('action' => 'view', $member['Member']['id'])); ?>
-			<?php echo $this->Html->link(__('Edit'), array('action' => 'edit', $member['Member']['id'])); ?>
-			<?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $member['Member']['id']), array('confirm' => __('Are you sure you want to delete # %s?', $member['Member']['id']))); ?>
-		</td>
-	</tr>
+                        <tr>
+                            <td><?php echo h($member['Member']['name']); ?>&nbsp;</td>
+                            <td><?php echo h($member['Member']['cedula']); ?>&nbsp;</td>
+                            <td><?php echo h($member['Member']['tel-habitacion']); ?>&nbsp;</td>
+                            <td><?php echo h($member['Member']['tel-trabajo']); ?>&nbsp;</td>
+                            <td><?php echo h($member['Member']['tel-cel']); ?>&nbsp;</td>
+                            <td><?php echo h($member['Member']['programa-obtar']); ?>&nbsp;</td>
+                            <td><?php echo h($member['Member']['is-ahorro']); ?>&nbsp;</td>
+                            <td><?php echo h($member['Member']['is-bono-59']); ?>&nbsp;</td>
+                            <td><?php $fecha = new DateTime($member['Member']['ingreso']);
+                            echo $fecha->format("d-m-Y"); ?>&nbsp;</td>
+                            <td class="actions">
+			<?php echo $this->Html->link(__('<i class="fa fa-pencil-square-o fa-lg"></i> Editar'), array('action' => 'edit', $member['Member']['id']),array('escape' => false)); ?>
+                                <br/>
+			<?php echo $this->Form->postLink(__('<i class="fa fa-trash fa-lg"></i> Borrar'), array('action' => 'delete', $member['Member']['id']), array('escape' => false,'confirm' => __('Esta seguro que desea eliminar al Asociado "'.$member['Member']['name'].'"?', $member['Member']['id']))); ?>
+                                <br/>
+                                <?php echo $this->Html->link(__('<i class="fa fa-download fa-lg"></i> Carne'), array('action' => 'generateCarne', $member['Member']['id']),array('escape' => false)); ?>
+                            </td>
+                        </tr>
 <?php endforeach; ?>
-	</tbody>
-	</table>
-	<p>
-	<?php
-	echo $this->Paginator->counter(array(
-		'format' => __('Page {:page} of {:pages}, showing {:current} records out of {:count} total, starting on record {:start}, ending on {:end}')
-	));
-	?>	</p>
-	<div class="paging">
-	<?php
-		echo $this->Paginator->prev('< ' . __('previous'), array(), null, array('class' => 'prev disabled'));
-		echo $this->Paginator->numbers(array('separator' => ''));
-		echo $this->Paginator->next(__('next') . ' >', array(), null, array('class' => 'next disabled'));
-	?>
-	</div>
-</div>
-<div class="actions">
-	<h3><?php echo __('Actions'); ?></h3>
-	<ul>
-		<li><?php echo $this->Html->link(__('New Member'), array('action' => 'add')); ?></li>
-	</ul>
+                    </tbody>
+                </table>
+                <div class="pagination pagination-large">
+                    <ul class="pagination">
+            <?php
+                echo $this->Paginator->prev(__('Anterior'), array('tag' => 'li'), null, array('tag' => 'li','class' => 'disabled','disabledTag' => 'a'));
+                echo $this->Paginator->numbers(array('separator' => '','currentTag' => 'a', 'currentClass' => 'active','tag' => 'li','first' => 1));
+                echo $this->Paginator->next(__('Siguiente'), array('tag' => 'li','currentClass' => 'disabled'), null, array('tag' => 'li','class' => 'disabled','disabledTag' => 'a'));
+            ?>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </div>
 </div>

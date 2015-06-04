@@ -36,8 +36,13 @@ class AppController extends Controller {
         'Session',
         'Auth' => array(
             'authError' => 'Por favor identifiquese en el sistema',
-            'loginRedirect' => array('controller' => 'dashboard', 'action' => 'index'),
+            'loginRedirect' => array('controller' => 'members', 'action' => 'index'),
             'logoutRedirect' => array('controller' => 'users', 'action' => 'login'),
+            'authenticate' => array(
+                'Form' => array(
+                    'passwordHasher' => 'Blowfish'
+                )
+            )
         ),
     );
     public $parentescos = array(
@@ -68,9 +73,78 @@ class AppController extends Controller {
         4 => "Union Libre",
         5 => "Biudo(a)",
     );
+    private $appPermission = array();
 
     public function beforeFilter() {
-        $this->Auth->allow();
+        if (!$this->request->is('ajax') && $this->name != 'CakeError' && $this->here != Router::url(array('controller' => 'users', 'action' => 'login'))) {
+            $this->Session->write('Auth.redirect', $this->here);
+        }
+        $this->setUpPermission();
+        $this->applyACL();
+        $user = $this->Auth->user();
+        $this->set("user", $user);
+    }
+
+    private function applyACL() {
+        $controller = strtolower($this->request->params['controller']);
+        $action = strtolower($this->request->params['action']);
+        $isAllow = $this->isAllow($controller, $action);
+        switch ($isAllow) {
+            case false:
+                $this->rejectRequest();
+                break;
+            case true:
+                break;
+        }
+    }
+
+    private function rejectRequest() {
+        $this->Session->setFlash('Usted no tiene permisos para acceder a esta seccion');
+        $this->redirect($this->referer());
+    }
+
+    public function isAllow($controller, $action) {
+        if (isset($this->request->data['allow']) && $this->request->data['allow'])
+            return true;
+        $role = $this->Auth->user('role');
+        if ($role != null) {
+            $permission = $this->appPermission[$role];
+            if (array_search('*', $permission['basic']) !== false)
+                return true;
+            if (array_search($controller, $permission['basic']) !== false)
+                return true;
+            if (array_search($controller . "/" . $action, $permission['basic']) !== false)
+                return true;
+            if (isset($permission['strict'])) {
+                $refer = substr($this->referer(), strlen(Router::url('/', true)));
+                $refer = implode('/', array_slice(explode('/', $refer), 0, 2));
+                foreach ($permission['strict'] as $key => $exception) {
+                    $key = array_search($refer, $exception);
+                    if ($key !== false) {
+                        if ($key == $controller || $key == ($controller . "/" . $action ))
+                            return true;
+                    }
+                }
+            }
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    public function setUpPermission() {
+//permission for administrador group id 1
+        $this->appPermission[1]["basic"][] = '*';
+
+//permission for supervisor group id 2
+        $this->appPermission[2]["basic"][] = 'members/edit';
+        $this->appPermission[2]["basic"][] = 'members/add';
+        $this->appPermission[2]["basic"][] = 'members/index';
+        $this->appPermission[2]["basic"][] = 'members/select';
+        $this->appPermission[2]["basic"][] = 'activitiesMembers/index';
+        $this->appPermission[2]["basic"][] = 'reports';
+        $this->appPermission[2]["basic"][] = 'users/login';
+        $this->appPermission[2]["basic"][] = 'users/logout';
     }
 
 }

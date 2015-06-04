@@ -4,12 +4,12 @@
             Fichas de Asociados
         </div>
     </a>
-    <a href="<?php echo Router::url(array("controller"=>"members")) ?>">
+    <a href="<?php echo Router::url(array("controller"=>"ActivitiesMembers")) ?>">
         <div class="boton-box">
             Actividades
         </div>
     </a>
-    <a href="<?php echo Router::url(array("controller"=>"members")) ?>">
+    <a href="<?php echo Router::url(array("controller"=>"reports")) ?>">
         <div class="boton-box">
             Reportes
         </div>

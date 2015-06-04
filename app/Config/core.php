@@ -83,7 +83,7 @@ Configure::write('Exception', array(
 /**
  * Application wide charset encoding
  */
-Configure::write('App.encoding', 'UTF-8');
+Configure::write('App.encoding', 'ISO-8859-1');
 
 /**
  * To configure CakePHP *not* to use mod_rewrite and to
@@ -222,7 +222,7 @@ Configure::write('Session', array(
 /**
  * A random string used in security hashing methods.
  */
-Configure::write('Security.salt', 'DYhG93b0qyJfIxfs2guVODIbWwvniR2G0FgaC9mi');
+Configure::write('Security.salt', '2WyfvSVNtBLNA5PMb2wxWuoK0oidj');
 
 /**
  * A random numeric string (digits only) used to encrypt/decrypt strings.

@@ -1,25 +1,43 @@
-<div class="members">
-<?php echo $this->Form->create('Member'); ?>
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">
+                Agregar Asociado
+            </h1>
+        </div>
+    </div>
+    <!-- /.row --><?php echo $this->Form->create('Member'); ?>
     <fieldset>
-        <legend><?php echo __('Add Member'); ?></legend>
 	<?php
-		echo $this->Form->input('id');
-		echo $this->Form->input('name');
+		echo $this->Form->input('name',array("label"=>"Nombre"));
 		echo $this->Form->input('cedula');
 		echo $this->Form->input('edad');
 		echo $this->Form->input('estado-civil',array("label"=>"Estado Civil","options"=>$estadosCiviles));
 		echo $this->Form->input('tel-habitacion',array("label"=>"Telefono Habitacion"));
 		echo $this->Form->input('tel-trabajo',array("label"=>"Telefono Trabajo"));
 		echo $this->Form->input('tel-cel',array("label"=>"Telefono Celular"));
-		echo $this->Form->input('direccion',array("label"=>"Dirección"));
-		echo $this->Form->input('ocupacion',array("label"=>"Ocupación"));
+		echo $this->Form->input('direccion',array("label"=>"Direccion"));
+		echo $this->Form->input('ocupacion',array("label"=>"Ocupacion"));
 		echo $this->Form->input('trabajo',array("label"=>"Lugar de Trabajo"));
 		echo $this->Form->input('programa-obtar',array("label"=>"Programa a Obtar"));
-		echo $this->Form->input('is-ahorro',array("legend"=>"Ahorro / Credito","type"=>"radio","options"=>array(1=>"Ahorro","Credito")));
-		echo $this->Form->input('is-bono-59',array("label"=>"Bono ley 59","type"=>"checkbox"));?>
+                echo '<div class="form-group">';
+                echo '<label>Ahorro / Credito</label>';
+                echo $this->Form->input("is-ahorro", array(
+                'before' => '<div class="radio">',
+                'after' => '</div>',
+                "div"=>false,
+                'separator' => '</div><div class="radio">',
+                'legend' => false,
+                "options"=>array(1=>"Ahorro",0=>"Credito"),
+                'type' => 'radio'
+                ));
+                echo '</div>'; 
+		echo $this->Form->input('is-bono-59',array("div"=>"form-group","label"=>"Bono ley 59","type"=>"checkbox"));?>
         <div class="familimembers">
-            <div onclick="agregarMiembro()"> Agregar Miembro</div>
-            <table class="members-table table table-striped table-bordered table-hover">
+            <div class="btn btn-default btn-success" onclick="agregarMiembro()"> <i class="fa fa-lg fa-user"></i> &nbsp;Agregar Miembro</div>
+            <table class="members-table table table-striped table-hover">
                 <thead>
                     <tr>
                         <th style="width: 1%">&nbsp;</th>
@@ -37,41 +55,43 @@
                     </tr>
                 </thead>
                 <tbody id="family-members-list">
-                    <?php foreach($this->request->data["Familymember"] as $index => $familyMember){?>
-                    <tr>data[Familymember][" + familyMemberIndex + "][" + name + "]
-                        <td><?php  echo $this->Form->input('Familymember.'+$index+'.id',array("label"=>false,"div"=>false)); ?></td>
-                        <td><?php  echo $this->Form->input('Familymember.'+$index+'.name',array("label"=>false,"div"=>false)); ?></td>
-                        <td><?php  echo $this->Form->input('Familymember.'+$index+'.edad',array("label"=>false,"div"=>false));?> </td>
-                        <td><?php  echo $this->Form->input('Familymember.'+$index+'.cedula',array(,"label"=>false,"div"=>false));?> </td>
-                        <td><?php  echo $this->Form->input('Familymember.'+$index+'.parentesco',array("options"=>$parentescos,"label"=>false,"div"=>false));?> </td>
-                        <td><?php  echo $this->Form->input('Familymember.'+$index+'.estado-civil',array(,"options"=>$estadosCiviles,"label"=>false,"div"=>false));?> </td>
-                        <td><?php  echo $this->Form->input('Familymember.'+$index+'.ocupacion',array("label"=>false,"div"=>false));?> </td>
-                        <td><?php  echo $this->Form->input('Familymember.'+$index+'.lugar-trabajo',array("label"=>false,"div"=>false));?> </td>
-                        <td><?php  echo $this->Form->input('Familymember.'+$index+'.tel',array("label"=>false,"div"=>false));?> </td>
-                        <td><?php  echo $this->Form->input('Familymember.'+$index+'.salario-bruto',array("label"=>false,"div"=>false));?> </td>
-                        <td><?php  echo $this->Form->input('Familymember.'+$index+'.salario-neto',array("label"=>false,"div"=>false));?> </td>
-                        <td><?php  echo $this->Form->input('Familymember.'+$index+'.is-ccss',array("type"=>"checkbox","label"=>false,"div"=>false));   ?> </td>
-                    </tr>
-                <?php } ?>
+                    <?php if(isset($this->request->data["Familymember"])){
+                        foreach($this->request->data["Familymember"] as $index => $familyMember){?>
+                    <tr>
+                        <td><i class="fa fa-trash fa-lg" onclick="deleteRow(this)"></i></td>
+                        <td><?php  echo $this->Form->input('Familymember.'.$index.'.name',array("label"=>false,"div"=>false)); ?></td>
+                        <td><?php  echo $this->Form->input('Familymember.'.$index.'.edad',array("label"=>false,"div"=>false));?> </td>
+                        <td><?php  echo $this->Form->input('Familymember.'.$index.'.cedula',array("label"=>false,"div"=>false));?> </td>
+                        <td><?php  echo $this->Form->input('Familymember.'.$index.'.parentesco',array("options"=>$parentescos,"label"=>false,"div"=>false));?> </td>
+                        <td><?php  echo $this->Form->input('Familymember.'.$index.'.estado-civil',array("options"=>$estadosCiviles,"label"=>false,"div"=>false));?> </td>
+                        <td><?php  echo $this->Form->input('Familymember.'.$index.'.ocupacion',array("label"=>false,"div"=>false));?> </td>
+                        <td><?php  echo $this->Form->input('Familymember.'.$index.'.lugar-trabajo',array("label"=>false,"div"=>false));?> </td>
+                        <td><?php  echo $this->Form->input('Familymember.'.$index.'.tel',array("label"=>false,"div"=>false));?> </td>
+                        <td><?php  echo $this->Form->input('Familymember.'.$index.'.salario-bruto',array("label"=>false,"div"=>false));?> </td>
+                        <td><?php  echo $this->Form->input('Familymember.'.$index.'.salario-neto',array("label"=>false,"div"=>false));?> </td>
+                        <td><?php  echo $this->Form->input('Familymember.'.$index.'.is-ccss',array("type"=>"checkbox","label"=>false,"div"=>false));   ?> </td>
+                <?php } 
+                    }?>
                 </tbody>
             </table>
 
 
         </div>
                 <?php 
-		echo $this->Form->input('is-discapacitado');
-		echo $this->Form->input('discapacidad-details');
-		echo $this->Form->input('observaciones');
-		echo $this->Form->input('elaborado-por');
-		echo $this->Form->input('ingreso');
-	?>
+        echo $this->Form->input('is-discapacitado',array("div"=>"form-group","label"=>"Es discapacitado","type"=>"checkbox"));
+        echo $this->Form->input('discapacidad-details',array("label"=>"Detalles discapacidad"));
+        echo $this->Form->input('observaciones');
+        echo $this->Form->input('elaborado-por',array("label"=>"Elaborado por"));
+        echo $this->Form->input('ingreso',array("label"=>"Fecha Ingreso"));
+        ?>
     </fieldset>
-<?php echo $this->Form->end(__('Submit')); ?>
+<?php echo $this->Form->submit('Guardar',array("class"=>"btn btn-default btn-success","after"=>"<a href='".Router::url(array("action"=>"index"))."'class='btn btn-default btn-danger' style='margin-left:10px;'>Cancelar</a>")); ?>
+<?php echo $this->Form->end(); ?>
 </div>
 <table style="display: none;">
     <tbody id="default-row">
         <tr>
-            <td><div class='delete-member' onclick="deleteRow(this)">D</div></td>
+            <td><div class='delete-member' onclick="deleteRow(this)"><i class="fa fa-trash fa-lg"></i></div></td>
             <td><?php  echo $this->Form->input('name',array("name"=>"name","label"=>false,"div"=>false)); ?></td>
             <td><?php  echo $this->Form->input('edad',array("name"=>"edad","label"=>false,"div"=>false));?> </td>
             <td><?php  echo $this->Form->input('cedula',array("name"=>"cedula","label"=>false,"div"=>false));?> </td>
