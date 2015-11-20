@@ -18,7 +18,17 @@ class Member extends AppModel {
         'name' => array(
             'notEmpty' => array(
                 'rule' => array('notEmpty'),
-            //'message' => 'Your custom message here',
+                'message' => 'Por favor ingrese un valor',
+            //'allowEmpty' => false,
+            //'required' => false,
+            //'last' => false, // Stop validation after this rule
+            //'on' => 'create', // Limit validation to 'create' or 'update' operations
+            ),
+        ),
+        'carnet-cd' => array(
+            'notEmpty' => array(
+                'rule' => array('isUnique'),
+                'message' => 'Este valor ya fue agregado previamente',
             //'allowEmpty' => false,
             //'required' => false,
             //'last' => false, // Stop validation after this rule
@@ -28,7 +38,7 @@ class Member extends AppModel {
         'cedula' => array(
             'notEmpty' => array(
                 'rule' => array('notEmpty'),
-            //'message' => 'Your custom message here',
+                'message' => 'Por favor ingrese un valor',
             //'allowEmpty' => false,
             //'required' => false,
             //'last' => false, // Stop validation after this rule
@@ -38,7 +48,7 @@ class Member extends AppModel {
         'edad' => array(
             'numeric' => array(
                 'rule' => array('numeric'),
-            //'message' => 'Your custom message here',
+                'message' => 'Por favor ingrese un valor numerico',
             //'allowEmpty' => false,
             //'required' => false,
             //'last' => false, // Stop validation after this rule
@@ -48,7 +58,7 @@ class Member extends AppModel {
         'estado-civil' => array(
             'numeric' => array(
                 'rule' => array('numeric'),
-            //'message' => 'Your custom message here',
+                'message' => 'Por favor ingrese un valor',
             //'allowEmpty' => false,
             //'required' => false,
             //'last' => false, // Stop validation after this rule
@@ -58,7 +68,7 @@ class Member extends AppModel {
         'tel-habitacion' => array(
             'notEmpty' => array(
                 'rule' => array('notEmpty'),
-            //'message' => 'Your custom message here',
+                'message' => 'Por favor ingrese un valor',
             //'allowEmpty' => false,
             //'required' => false,
             //'last' => false, // Stop validation after this rule
@@ -68,7 +78,7 @@ class Member extends AppModel {
         'tel-trabajo' => array(
             'notEmpty' => array(
                 'rule' => array('notEmpty'),
-            //'message' => 'Your custom message here',
+                'message' => 'Por favor ingrese un valor',
             //'allowEmpty' => false,
             //'required' => false,
             //'last' => false, // Stop validation after this rule
@@ -78,7 +88,7 @@ class Member extends AppModel {
         'tel-cel' => array(
             'notEmpty' => array(
                 'rule' => array('notEmpty'),
-            //'message' => 'Your custom message here',
+                'message' => 'Por favor ingrese un valor',
             //'allowEmpty' => false,
             //'required' => false,
             //'last' => false, // Stop validation after this rule
@@ -88,7 +98,7 @@ class Member extends AppModel {
         'direccion' => array(
             'notEmpty' => array(
                 'rule' => array('notEmpty'),
-            //'message' => 'Your custom message here',
+                'message' => 'Por favor ingrese un valor',
             //'allowEmpty' => false,
             //'required' => false,
             //'last' => false, // Stop validation after this rule
@@ -98,7 +108,7 @@ class Member extends AppModel {
         'ocupacion' => array(
             'notEmpty' => array(
                 'rule' => array('notEmpty'),
-            //'message' => 'Your custom message here',
+                'message' => 'Por favor ingrese un valor',
             //'allowEmpty' => false,
             //'required' => false,
             //'last' => false, // Stop validation after this rule
@@ -108,7 +118,7 @@ class Member extends AppModel {
         'trabajo' => array(
             'notEmpty' => array(
                 'rule' => array('notEmpty'),
-            //'message' => 'Your custom message here',
+                'message' => 'Por favor ingrese un valor',
             //'allowEmpty' => false,
             //'required' => false,
             //'last' => false, // Stop validation after this rule
@@ -117,8 +127,8 @@ class Member extends AppModel {
         ),
         'programa-obtar' => array(
             'numeric' => array(
-                'rule' => array('numeric'),
-            //'message' => 'Your custom message here',
+                'rule' => array('notEmpty'),
+                'message' => 'Por favor ingrese un valor',
             //'allowEmpty' => false,
             //'required' => false,
             //'last' => false, // Stop validation after this rule
@@ -158,7 +168,7 @@ class Member extends AppModel {
         'discapacidad-details' => array(
             'notEmpty' => array(
                 'rule' => array('notEmpty'),
-            //'message' => 'Your custom message here',
+                'message' => 'Por favor ingrese un valor',
             //'allowEmpty' => false,
             //'required' => false,
             //'last' => false, // Stop validation after this rule
@@ -168,7 +178,7 @@ class Member extends AppModel {
         'observaciones' => array(
             'notEmpty' => array(
                 'rule' => array('notEmpty'),
-            //'message' => 'Your custom message here',
+                'message' => 'Por favor ingrese un valor',
             //'allowEmpty' => false,
             //'required' => false,
             //'last' => false, // Stop validation after this rule
@@ -178,7 +188,7 @@ class Member extends AppModel {
         'elaborado-por' => array(
             'notEmpty' => array(
                 'rule' => array('notEmpty'),
-            //'message' => 'Your custom message here',
+                'message' => 'Por favor ingrese un valor',
             //'allowEmpty' => false,
             //'required' => false,
             //'last' => false, // Stop validation after this rule

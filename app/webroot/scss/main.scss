@@ -150,3 +150,20 @@ body.hide_nav{
         -webkit-transform: scale(1.0);
     }
 }
+
+.form-error {
+    border: 2px #D20E0E solid;
+}
+.error-message{ 
+    background: #D20E0E;
+    color: #fff;
+    padding: 0px 1px;
+    text-align: center;
+}
+
+#flashMessage{
+    background: #3755EA;
+    padding: 5px;
+    color: #fff;
+    font-weight: bold;
+}

@@ -30,6 +30,7 @@ class MembersController extends AppController {
             if (strlen(trim($datos['Member']['filter'])) != 0) {
                 $condiciones[] = " Member.cedula like '%" . $datos['Member']['filter'] . "%'";
                 $condiciones[] = " Member.name like '%" . $datos['Member']['filter'] . "%'";
+                $condiciones[] = " Member.carnet-cd  ='" . $datos['Member']['filter'] . "'";
             }
         }
         $this->set('members', $this->paginate('Member', implode(' or ', $condiciones)));
@@ -49,6 +50,7 @@ class MembersController extends AppController {
             if (strlen(trim($datos['Member']['filter'])) != 0) {
                 $condiciones[] = " Member.cedula like '%" . $datos['Member']['filter'] . "%'";
                 $condiciones[] = " Member.name like '%" . $datos['Member']['filter'] . "%'";
+                $condiciones[] = " Member.carnet-cd = '" . $datos['Member']['filter'] . "'";
             }
         }
         $this->set('members', $this->paginate('Member', implode(' or ', $condiciones)));
@@ -98,10 +100,10 @@ class MembersController extends AppController {
      * @param string $id
      * @return void
      */
-    public function getMember($cedula = null) {
+    public function getMember($carnetCD = null) {
         $this->autoRender = false;
         $this->Member->recursive = -1;
-        $member = $this->Member->find("first", array("conditions" => array("Member.cedula" => $cedula)));
+        $member = $this->Member->find("first", array("conditions" => array("Member.carnet-cd" => $carnetCD)));
         $response = array("exist" => false);
         if (isset($member["Member"]["id"])) {
             $response = array(

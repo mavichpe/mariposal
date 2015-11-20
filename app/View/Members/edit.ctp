@@ -13,6 +13,7 @@
 	<?php
                 echo $this->Form->input('id');
 		echo $this->Form->input('name',array("label"=>"Nombre"));
+                echo $this->Form->input('carnet-cd',array("label"=>"Numero de Carne"));
 		echo $this->Form->input('cedula');
 		echo $this->Form->input('edad');
 		echo $this->Form->input('estado-civil',array("label"=>"Estado Civil","options"=>$estadosCiviles));
